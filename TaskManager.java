@@ -3,6 +3,7 @@ import java.time.LocalDateTime;
 
 public class TaskManager {
     ArrayList<Task> tasks;
+    StorageManager storageManager;
 
     public void addTask(String description) {
         
@@ -24,13 +25,13 @@ public class TaskManager {
         tasks.add(newTask);
     }
 
-    public void listTask(){
+    public void listTasks(){
 
         if(tasks.size()==0){
             System.out.println("No tasks found.");
             return;
         }
-        
+
         for(int i=0; i<tasks.size(); i++){
           System.out.println("ID: "+tasks.get(i).id);  
           System.out.println("Description: "+tasks.get(i).description);
@@ -39,5 +40,32 @@ public class TaskManager {
           System.out.println("UpdatedAt: "+tasks.get(i).updatedAt);
           System.out.println();
         }
+    }
+
+    public void listTasks(String filter){
+
+        for(int i=0; i<tasks.size(); i++){
+            if(tasks.get(i).status.equals(filter)){
+                System.out.println("ID: "+tasks.get(i).id);  
+                System.out.println("Description: "+tasks.get(i).description);
+                System.out.println("Status: "+tasks.get(i).status);
+                System.out.println("CreatedAt: "+tasks.get(i).createdAt);
+                System.out.println("UpdatedAt: "+tasks.get(i).updatedAt);
+                System.out.println();
+            }
+        }
+    }
+
+    public void deleteTask(int id){
+
+        for(int i=0; i<tasks.size(); i++){
+            if(tasks.get(i).id == id){
+                tasks.remove(i);
+                storageManager.save(tasks);
+                return;
+            } 
+        }
+
+        System.out.println("Task not found.");
     }
 }
