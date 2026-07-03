@@ -23,4 +23,21 @@ public class TaskManager {
         
         tasks.add(newTask);
     }
+
+    public void listTask(){
+
+        if(tasks.size()==0){
+            System.out.println("No tasks found.");
+            return;
+        }
+        
+        for(int i=0; i<tasks.size(); i++){
+          System.out.println("ID: "+tasks.get(i).id);  
+          System.out.println("Description: "+tasks.get(i).description);
+          System.out.println("Status: "+tasks.get(i).status);
+          System.out.println("CreatedAt: "+tasks.get(i).createdAt);
+          System.out.println("UpdatedAt: "+tasks.get(i).updatedAt);
+          System.out.println();
+        }
+    }
 }
