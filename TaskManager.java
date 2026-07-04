@@ -84,5 +84,17 @@ public class TaskManager {
         System.out.println("Task not found.");
     }
 
+    public void markStatus(int id, String status){
 
+        for(int i=0; i<tasks.size(); i++){
+            if(tasks.get(i).id==id){
+                tasks.get(i).status = status;
+                tasks.get(i).updatedAt = LocalDateTime.now().toString();
+                storageManager.save(tasks);
+                return;
+            }
+        }
+
+        System.out.println("task not found.");
+    }
 }
