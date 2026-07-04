@@ -102,6 +102,7 @@ public class TaskManager {
                 return;
                 }catch(IllegalArgumentException e){
                     System.out.println("Invalid status. Use: todo, in-progress, done");
+                    return;
                 }
             }
         }
