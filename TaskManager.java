@@ -18,7 +18,7 @@ public class TaskManager {
         
         newTask.id=newId;
         newTask.description=description;
-        newTask.status="todo";
+        newTask.status=Status.TODO;
         newTask.createdAt=LocalDateTime.now().toString();
         newTask.updatedAt=LocalDateTime.now().toString();
         
@@ -45,16 +45,23 @@ public class TaskManager {
 
     public void listTasks(String filter){
 
+        try{
+        Status filterStatus = Status.valueOf(filter.toUpperCase().replace("-","_"));
+
         for(int i=0; i<tasks.size(); i++){
-            if(tasks.get(i).status.equals(filter)){
+            
+            if(tasks.get(i).status==filterStatus){
                 System.out.println("ID: "+tasks.get(i).id);  
                 System.out.println("Description: "+tasks.get(i).description);
                 System.out.println("Status: "+tasks.get(i).status);
                 System.out.println("CreatedAt: "+tasks.get(i).createdAt);
                 System.out.println("UpdatedAt: "+tasks.get(i).updatedAt);
                 System.out.println();
-            }
+            } 
         }
+        }catch(IllegalArgumentException e){
+            System.out.println("Invalid status. Use: todo, in-progress, done");
+        }   
     }
 
     public void deleteTask(int id){
@@ -88,10 +95,14 @@ public class TaskManager {
 
         for(int i=0; i<tasks.size(); i++){
             if(tasks.get(i).id==id){
-                tasks.get(i).status = status;
+                try{
+                tasks.get(i).status = Status.valueOf(status.toUpperCase().replace("-","_"));
                 tasks.get(i).updatedAt = LocalDateTime.now().toString();
                 storageManager.save(tasks);
                 return;
+                }catch(IllegalArgumentException e){
+                    System.out.println("Invalid status. Use: todo, in-progress, done");
+                }
             }
         }
 

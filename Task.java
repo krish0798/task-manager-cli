@@ -1,7 +1,7 @@
 public class Task {
     int id;
     String description;
-    String status;
+    Status status;
     String createdAt;
     String updatedAt;
 }
