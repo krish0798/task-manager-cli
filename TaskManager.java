@@ -23,6 +23,7 @@ public class TaskManager {
         newTask.updatedAt=LocalDateTime.now().toString();
         
         tasks.add(newTask);
+        storageManager.save(tasks);
     }
 
     public void listTasks(){
@@ -68,4 +69,20 @@ public class TaskManager {
 
         System.out.println("Task not found.");
     }
+
+    public void updateTask(int id, String newDescription){
+
+        for(int i=0; i<tasks.size(); i++){
+            if(tasks.get(i).id == id){
+                tasks.get(i).description = newDescription;
+                tasks.get(i).updatedAt = LocalDateTime.now().toString();
+                storageManager.save(tasks);
+                return;
+            }
+        }
+
+        System.out.println("Task not found.");
+    }
+
+
 }
