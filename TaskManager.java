@@ -48,17 +48,17 @@ public class TaskManager {
         try{
         Status filterStatus = Status.valueOf(filter.toUpperCase().replace("-","_"));
 
-        for(int i=0; i<tasks.size(); i++){
+            for(int i=0; i<tasks.size(); i++){
             
-            if(tasks.get(i).status==filterStatus){
-                System.out.println("ID: "+tasks.get(i).id);  
-                System.out.println("Description: "+tasks.get(i).description);
-                System.out.println("Status: "+tasks.get(i).status);
-                System.out.println("CreatedAt: "+tasks.get(i).createdAt);
-                System.out.println("UpdatedAt: "+tasks.get(i).updatedAt);
-                System.out.println();
-            } 
-        }
+                if(tasks.get(i).status==filterStatus){
+                    System.out.println("ID: "+tasks.get(i).id);  
+                    System.out.println("Description: "+tasks.get(i).description);
+                    System.out.println("Status: "+tasks.get(i).status);
+                    System.out.println("CreatedAt: "+tasks.get(i).createdAt);
+                    System.out.println("UpdatedAt: "+tasks.get(i).updatedAt);
+                    System.out.println();
+                } 
+            }
         }catch(IllegalArgumentException e){
             System.out.println("Invalid status. Use: todo, in-progress, done");
         }   
@@ -91,7 +91,7 @@ public class TaskManager {
         System.out.println("Task not found.");
     }
 
-    public void markStatus(int id, String status){
+    public void markStatus(String status, int id){
 
         for(int i=0; i<tasks.size(); i++){
             if(tasks.get(i).id==id){
@@ -107,6 +107,6 @@ public class TaskManager {
             }
         }
 
-        System.out.println("task not found.");
+        System.out.println("Task not found.");
     }
 }
