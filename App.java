@@ -2,6 +2,12 @@ public class App{
     public static void main(String[] args) {
         TaskManager taskManager = new TaskManager();
 
+        if(args.length == 0) {
+            System.out.println("Usage: java App <command>");
+            System.out.println("Available commands: add, list, update, delete, mark-in-progress, mark-done");
+            return;
+        }
+
         switch (args[0]) {
             case "add":
                 taskManager.addTask(args[1]);

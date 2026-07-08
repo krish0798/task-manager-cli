@@ -2,8 +2,12 @@ import java.util.*;
 import java.time.LocalDateTime;
 
 public class TaskManager {
-    ArrayList<Task> tasks;
+    ArrayList<Task> tasks = new ArrayList<>();
     StorageManager storageManager;
+
+    public TaskManager(){
+        tasks = storageManager.load();
+    }
 
     public void addTask(String description) {
         
@@ -44,6 +48,11 @@ public class TaskManager {
     }
 
     public void listTasks(String filter){
+
+        if(tasks.size()==0){
+            System.out.println("No tasks found.");
+            return;
+        }
 
         try{
         Status filterStatus = Status.valueOf(filter.toUpperCase().replace("-","_"));
@@ -92,6 +101,11 @@ public class TaskManager {
     }
 
     public void markStatus(String status, int id){
+
+        if(tasks.size()==0){
+            System.out.println("No tasks found.");
+            return;
+        }
 
         for(int i=0; i<tasks.size(); i++){
             if(tasks.get(i).id==id){
