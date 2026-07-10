@@ -13,6 +13,11 @@ class StorageManager {
 
             String content = new String(Files.readAllBytes(Paths.get(filename)));
             content = content.trim();
+
+            if(content.isEmpty() || content.equals("[]")){
+                return new ArrayList<>();
+            }
+            
             content = content.substring(1, content.length()-1).trim();
 
             if(content.isEmpty()){
