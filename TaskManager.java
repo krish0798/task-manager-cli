@@ -3,7 +3,7 @@ import java.time.LocalDateTime;
 
 public class TaskManager {
     ArrayList<Task> tasks = new ArrayList<>();
-    StorageManager storageManager;
+    StorageManager storageManager = new StorageManager();
 
     public TaskManager(){
         tasks = storageManager.load();

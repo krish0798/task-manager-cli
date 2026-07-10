@@ -16,7 +16,7 @@ public class App{
                 if(args.length==1){
                     taskManager.listTasks();
                 }else{
-                taskManager.listTasks(args[1]);
+                    taskManager.listTasks(args[1]);
                 }
                 break;
             case "update":
