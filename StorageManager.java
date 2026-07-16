@@ -24,6 +24,9 @@ class StorageManager {
                 return new ArrayList<>();
             }
 
+            content = content.replace("\n", "").replace("\r", "");
+            content = content.replace("}, {", "},{");
+
             String[] taskStrings = content.split("},\\{");
             ArrayList<Task> tasks = new ArrayList<>();
 
