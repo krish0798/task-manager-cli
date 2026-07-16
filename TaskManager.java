@@ -1,9 +1,11 @@
 import java.util.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class TaskManager {
     ArrayList<Task> tasks = new ArrayList<>();
     StorageManager storageManager = new StorageManager();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy, hh:mm a");
 
     public TaskManager(){
         tasks = storageManager.load();
@@ -23,8 +25,8 @@ public class TaskManager {
         newTask.id=newId;
         newTask.description=description;
         newTask.status=Status.TODO;
-        newTask.createdAt=LocalDateTime.now().toString();
-        newTask.updatedAt=LocalDateTime.now().toString();
+        newTask.createdAt=LocalDateTime.now().format(formatter);
+        newTask.updatedAt=LocalDateTime.now().format(formatter);
         
         tasks.add(newTask);
         storageManager.save(tasks);
@@ -91,7 +93,7 @@ public class TaskManager {
         for(int i=0; i<tasks.size(); i++){
             if(tasks.get(i).id == id){
                 tasks.get(i).description = newDescription;
-                tasks.get(i).updatedAt = LocalDateTime.now().toString();
+                tasks.get(i).updatedAt = LocalDateTime.now().format(formatter);
                 storageManager.save(tasks);
                 return;
             }
@@ -111,7 +113,7 @@ public class TaskManager {
             if(tasks.get(i).id==id){
                 try{
                 tasks.get(i).status = Status.valueOf(status.toUpperCase().replace("-","_"));
-                tasks.get(i).updatedAt = LocalDateTime.now().toString();
+                tasks.get(i).updatedAt = LocalDateTime.now().format(formatter);
                 storageManager.save(tasks);
                 return;
                 }catch(IllegalArgumentException e){
